@@ -28,8 +28,7 @@ const SpellCheckApp = () => {
     const result = customDictionary.find(
       (data) => data.word.toLowerCase() === inputText.toLowerCase()
     );
-
-    if (result.length) {
+    if (result) {
       setDictionaryMeaning(result.meaning);
     } else {
       setDictionaryMeaning("Word not found in the dictionary.");
