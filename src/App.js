@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 
-// Define a custom dictionary of words and their corrections
+// Define a custom dictionary of words and their definitions
 const customDictionary = [
   {
     word: "React",
     meaning: "A JavaScript library for building user interfaces.",
   },
-
-  { word: "Component", meaning: "A reusable building block in React." },
-
-  { word: "State", meaning: "An object that stores data for a component." },
+  {
+    word: "Component",
+    meaning: "A reusable building block in React.",
+  },
+  {
+    word: "State",
+    meaning: "An object that stores data for a component.",
+  },
 ];
 
 const SpellCheckApp = () => {
@@ -17,15 +21,19 @@ const SpellCheckApp = () => {
   const [dictionaryMeaning, setDictionaryMeaning] = useState("");
 
   const handleInput = (e) => {
-    setInputText(e);
+    setInputText(e.target.value);
   };
+
   const handleSearch = () => {
-    const result = customDictionary.filter(
-      (data) => data.word.toLowerCase() == inputText.toLowerCase()
+    const result = customDictionary.find(
+      (data) => data.word.toLowerCase() === inputText.toLowerCase()
     );
-    console.log(result);
-    if (result.length) setDictionaryMeaning(result[0].meaning);
-    else setDictionaryMeaning("Word not found in the dictionary.");
+
+    if (result.length) {
+      setDictionaryMeaning(result.meaning);
+    } else {
+      setDictionaryMeaning("Word not found in the dictionary.");
+    }
   };
 
   return (
@@ -34,7 +42,7 @@ const SpellCheckApp = () => {
       <input
         type="text"
         value={inputText}
-        onChange={(e) => handleInput(e.target.value)}
+        onChange={handleInput}
         placeholder="Search for a word..."
       />
       <button onClick={handleSearch}>Search</button>
